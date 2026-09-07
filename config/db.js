@@ -1,12 +1,19 @@
 const { Sequelize } = require('sequelize');
-const path = require('path');
+require('dotenv').config();
 
-// SQLite is used here for simplicity — no external database server needed.
-// The database file will be created automatically at project root as database.sqlite
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: path.join(__dirname, '..', 'database.sqlite'),
-  logging: false, // set to console.log if you want to see raw SQL queries
-});
+// PostgreSQL connection setup.
+// Values are read from environment variables (.env file) so credentials
+// are never hardcoded directly into the source code.
+const sequelize = new Sequelize(
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
+  {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: 'postgres',
+    logging: true, // set to console.log if you want to see raw SQL queries
+  }
+);
 
 module.exports = sequelize;

@@ -24,7 +24,7 @@ const User = sequelize.define('User', {
     allowNull: false, // this will store the HASHED password, never plain text
   },
 }, {
-  tableName: 'users',
+  tableName: 'app_user',
   timestamps: true, // adds createdAt and updatedAt automatically
 });
 
